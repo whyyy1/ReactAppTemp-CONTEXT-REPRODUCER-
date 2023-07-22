@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer,useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { reducer } from './Reducer';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 const initialState = {
   isLoggedIn: false,
   user: null,
-  
+
 };
 
 // Step 3: Create the context
@@ -29,12 +29,19 @@ const AuthContextProvider = ({ children }) => {
   });
 
   // If the "id" is not present in the stored state, generate a new "id"
-  if (state !== null && !state.id) {
-    state.id = uuidv4();
+  // if (state !== null && !state.id) {
+  //   state.id = uuidv4();
+  // }
+  async function getData() {
+    const response = await fetch('https://www.balldontlie.io/api/v1/players/254')
+    const data = await response.json()
+    console.log(data)
   }
 
   useEffect(() => {
+    // getData()
     localStorage.setItem("user", JSON.stringify(state));
+
   }, [state]);
 
   return (

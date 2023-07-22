@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAuthContext } from '../Authorize/AuthContext';
-
+import { Routes, Route } from 'react-router-dom';
 import AuthStack from '../Authorize/AuthStack';
 import AppStack from '../Authorize/AppStack';
-import { Routes, Route } from 'react-router-dom';
+
+import { useAuthContext } from '../Authorize/AuthContext';
 
 function AppNav() {
   const { state, dispatch } = useAuthContext();
@@ -14,6 +14,8 @@ function AppNav() {
       {!state.user ? <Route path="/*" element={<AuthStack />} /> : null}
       {/* Render AppStack when the user is logged in */}
       {state.user ? <Route path="/*" element={<AppStack />} /> : null}
+      {/* Add a default route to handle other URLs */}
+      <Route path="/*" element={<div>NOT FOUND</div>} />
     </Routes>
   );
 }

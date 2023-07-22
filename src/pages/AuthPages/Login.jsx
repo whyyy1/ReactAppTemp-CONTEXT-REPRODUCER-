@@ -1,34 +1,35 @@
-import React from 'react'
-import { useAuthContext } from '../../Authorize/AuthContext'
-import { useNavigate,useParams } from 'react-router-dom'
+import React from 'react';
+import { useAuthContext } from '../../Authorize/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 function Login() {
-    const navigate = useNavigate()
-    const params = useParams()
-    
-    const { state, dispatch } = useAuthContext()
+  const navigate = useNavigate();
+  const { state, dispatch } = useAuthContext();
+  
+  const handleLogin = () => {
     let user = {
-        firstName: 'him',
-        lastName: 'himmy',
-        email: 'this@that.com',
-        units: [{ this: 'that thing' }, 1, 'cant'],
-        id:uuidv4(),
-    }
-    params.user = user.id
-    let userAtt = '/' + params.user
+      firstName: 'him',
+      lastName: 'himmy',
+      email: 'this@that.com',
+      password: '123',
+      member: 'this',
+      id: uuidv4(),
+    };
 
+    // Dispatch the LOGIN action with the user object
+    dispatch({ type: 'LOGIN', payload: user });
 
-    return (
-        <div>Login
-            <button onClick={() => {
-                console.log(dispatch({ type: 'GET_USER', payload: state }))
-                dispatch({ type: 'LOGIN', payload: user })
-                navigate(userAtt)
-                console.log(dispatch({ type: 'GET_USER', payload: state }))
-            }}>Click me</button>
-        </div>
-    )
+    // After dispatching, navigate to the app home page with the user ID in the URL
+    navigate(`/home/${user.id}`);
+  };
+
+  return (
+    <div>
+      Login
+      <button onClick={handleLogin}>Click me</button>
+    </div>
+  );
 }
 
-export default Login
+export default Login;

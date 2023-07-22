@@ -13,9 +13,9 @@ function AuthStack() {
             <h1>AuthStack</h1>
             
             <Routes>
-                <Route path="loading/" element={<Loading />} />
-                <Route path="login/" element={<Login />} />
-                <Route path="register/" element={<Register />} />
+                <Route path="/loading" element={<Loading />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
 
             </Routes>
         </>
